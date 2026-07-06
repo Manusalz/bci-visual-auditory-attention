@@ -21,6 +21,8 @@ este paquete.
 - Taxonomía reproducible de eventos auditivos.
 - Clasificador tabular con validación cruzada, exactitud balanceada,
   permutaciones y bootstrap.
+- `paper_reproducibility/` con features anonimizadas por época, scripts para
+  recalcular BA/IC/p, tabla de auditoría final y figuras generadas por código.
 - Módulos opcionales de adquisición para publicar `BCI_Audio`,
   `EyeFix_Gaze` y `EyeFix_Markers` por LSL, junto con un selector demo de
   experimentos.
@@ -35,9 +37,9 @@ este paquete.
 - Logs con nombres, fechas reales o rutas locales.
 - Identificadores internos de adquisición.
 - El runner privado completo del laboratorio.
-- Tablas de resultados, material suplementario estadístico o valores finales
-  del manuscrito. Esos materiales deben distribuirse junto con el artículo o
-  en un repositorio de datos separado, según la política editorial.
+- XDF crudos, timestamps absolutos y logs originales necesarios para una
+  reproducción desde señal cruda. La reproducción pública del manuscrito parte
+  de features derivadas anonimizadas.
 
 ## Instalación
 
@@ -123,6 +125,8 @@ ventana o banda, balanced accuracy, intervalo bootstrap y p de permutación.
 - `docs/QC_RULES.md`: reglas de control de calidad y exclusión.
 - `docs/VALIDATION_STRATEGY.md`: clasificación, validación y azar empírico.
 - `docs/GITHUB_UPLOAD_CHECKLIST.md`: pasos recomendados antes de publicar.
+- `paper_reproducibility/`: reproducción de los resultados principales del
+  manuscrito desde features derivadas anonimizadas.
 
 ## Licencia
 

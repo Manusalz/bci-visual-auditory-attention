@@ -16,9 +16,9 @@
 - Logs originales con nombres, fechas reales o rutas locales.
 - El repositorio privado completo de adquisición/análisis.
 - Documentos de trabajo con nombres propios o comentarios no publicables.
-- Tablas de resultados del manuscrito o material suplementario estadístico,
-  salvo que se haya decidido explícitamente publicarlos en un repositorio de
-  datos asociado al artículo.
+- Tablas exploratorias, resultados intermedios no congelados o material
+  suplementario con identificadores privados. La carpeta `paper_reproducibility/`
+  contiene únicamente derivados anonimizados seleccionados para el manuscrito.
 
 ## Antes de publicar
 
