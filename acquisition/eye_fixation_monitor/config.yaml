@@ -1,0 +1,111 @@
+camera:
+  index: 0
+  width: 640
+  height: 480
+  fps: 30
+  backend: auto
+runtime:
+  mode: preview
+  demo_mode: auto
+  output_root: outputs
+  loop_hz: 30
+  mirror_preview: true
+  no_face_behavior: ignore
+mediapipe:
+  preferred_backend: auto
+  task_model_path: models/face_landmarker.task
+  auto_download_task_model: true
+  task_model_url: https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task
+calibration:
+  duration_s: 7.0
+  min_confidence: 0.35
+  min_samples: 25
+threshold:
+  mode: degrees
+  normalized_radius: 0.08
+  pixel_radius: 150.0
+  degree_radius: 4.0
+  invert_x: false
+  gain_x: 1.0
+  gain_y: 1.0
+  min_fixbreak_ms: 200
+  min_recover_ms: 120
+  head_yaw_guard:
+    enabled: true
+    yaw_dead_zone: 0.03
+    margin_deg_per_yaw: 30.0
+    max_margin_deg: 10.0
+    horizontal_dominance_ratio: 1.15
+  saccade_candidate:
+    enabled: true
+    speed_deg_s: 80.0
+    min_confidence: 0.35
+geometry:
+  eye_to_screen_cm: 50.0
+  screen_width_cm: 53.0
+  screen_width_px: 1920
+  screen_height_cm: null
+  screen_height_px: 1080
+video:
+  save: false
+  filename: webcam_overlay.mp4
+  codec: mp4v
+visualization:
+  show_landmarks: true
+  draw_iris: true
+  draw_pupil: true
+  iris_draw_scale: 0.82
+  pupil_draw_radius: 3
+  show_text: true
+auto_calibration:
+  enabled: false
+  center_duration_s: 3.0
+  side_duration_s: 2.5
+  min_confidence: 0.35
+  min_phase_samples: 12
+  side_angle_deg: 6.0
+  vertical_angle_deg: 4.0
+  head_yaw_angle_deg: 30.0
+  prepare_s: 3.0
+  initial_instruction_s: 10.0
+  head_instruction_s: 7.0
+  fullscreen: true
+  window_name: Eye AutoCalibration
+  target_radius_px: 18
+  show_webcam_thumbnail: true
+  beep_enabled: true
+  beep_hz: 1100
+  beep_short_ms: 120
+  beep_long_ms: 650
+  beep_gap_ms: 90
+  beep_start_ms: 70
+  beep_start_interval_s: 0.45
+  beep_start_window_s: 0.9
+  beep_cross_ms: 90
+  beep_cross_interval_s: 0.22
+  beep_end_guard_s: 0.15
+  gain_x_min: 0.7
+  gain_x_max: 10.0
+  gain_y_min: 0.5
+  gain_y_max: 4.0
+  pose_gain_x_min: -0.2
+  pose_gain_x_max: 0.2
+  show_phase_instructions: false
+  persist_to_yaml: true
+head_pose:
+  enabled: true
+  gain_x: 0.0
+  dead_zone: 0.02
+lsl:
+  enabled: true
+  marker_stream_name: EyeFix_Markers
+  marker_stream_type: Markers
+  marker_source_id: eye_fix_marker_01
+  sample_stream_name: EyeFix_Gaze
+  sample_stream_type: EyeGaze
+  sample_source_id: eye_fix_gaze_01
+  nominal_srate: 30.0
+  manual_test_marker: eye/manual/test
+output:
+  continuous_csv: gaze_samples.csv
+  events_csv: events.csv
