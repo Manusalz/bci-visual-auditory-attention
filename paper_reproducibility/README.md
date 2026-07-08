@@ -24,6 +24,11 @@ logs, absolute LSL timestamps, local paths, or private acquisition logs.
   table.
 - `scripts/make_reproducibility_figures.py`: regenerates the figures in this
   folder from the public CSVs.
+- `scripts/exploratory_p300_xdawn_from_epochs.py`: optional exploratory
+  xDAWN/OAS/Tangent pipeline from locally derived epoch arrays. It is not
+  required to reproduce the final table.
+- `requirements_xdawn_optional.txt`: optional dependencies for the xDAWN
+  sensitivity script.
 - `figures/`: code-generated reproducibility figures.
 
 ## Recompute final statistics
@@ -73,3 +78,9 @@ public feature tables:
 Raw recordings are private and therefore not included. A full raw-data rerun
 requires locally available XDF files and anonymized event tables with the
 schemas described in the extraction scripts.
+
+## Optional xDAWN/OAS/Tangent sensitivity
+
+The optional xDAWN script requires time-resolved epochs and MNE-Python. It is
+documented separately in `docs/EXPLORATORY_P300_XDAWN.md` because those epochs
+are derived from private recordings and are not part of the public release.

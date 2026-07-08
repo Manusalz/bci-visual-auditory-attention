@@ -124,6 +124,8 @@ ventana o banda, balanced accuracy, intervalo bootstrap y p de permutación.
 - `docs/DATA_LAYOUT.md`: estructura esperada de datos locales no incluidos.
 - `docs/QC_RULES.md`: reglas de control de calidad y exclusión.
 - `docs/VALIDATION_STRATEGY.md`: clasificación, validación y azar empírico.
+- `docs/EXPLORATORY_P300_XDAWN.md`: analisis complementario opcional con
+  xDAWN/OAS/Tangent desde epocas derivadas locales no publicadas.
 - `docs/GITHUB_UPLOAD_CHECKLIST.md`: pasos recomendados antes de publicar.
 - `paper_reproducibility/`: reproducción de los resultados principales del
   manuscrito desde features derivadas anonimizadas.

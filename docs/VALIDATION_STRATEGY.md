@@ -22,3 +22,9 @@ Para cada contraste se recomienda reportar:
 La p de permutación se estima reetiquetando al azar las clases y
 recalculando BA. En estudios piloto pequeños, esta prueba ayuda a no
 sobreinterpretar una BA aparentemente alta.
+
+Para analisis complementarios orientados a P300 se puede usar una validacion
+mas exigente por bloque/run, cuando el numero de bloques lo permite. En ese
+caso, cada fold deja afuera un bloque completo, el escalado, xDAWN,
+covarianzas y clasificador se ajustan solo con el train, y la permutacion se
+hace dentro de bloque/run para preservar la estructura temporal del registro.
