@@ -23,6 +23,9 @@ DEFAULT_MARKER_REGEX = (
     r"baseline/(open|closed)/(start|end)"
 )
 
+AUDIO2_DISPLAY = "Audio de dos corrientes"
+AUDIO4_DISPLAY = "Audio de cuatro clases"
+
 AudioMarker = dict[str, float | str | None]
 
 
@@ -112,26 +115,26 @@ def _marker_style(label: str, context: dict[str, str | None]) -> tuple[str, str,
         parts = label.split("/")
         if len(parts) >= 3:
             context["audio2_attended_side"] = parts[2].replace("att", "")
-        return f"Audio 2 atiende {context.get('audio2_attended_side')}", "#8c6d31", "-", 1.2
+        return f"{AUDIO2_DISPLAY}: atiende {context.get('audio2_attended_side')}", "#8c6d31", "-", 1.2
     if label.startswith("audio2/event/") and "/tgt" in label:
         parts = label.split("/")
         side = parts[2] if len(parts) > 2 else "?"
         if side == context.get("audio2_attended_side"):
-            return f"Audio 2 target atendido {side}", "#006d2c" if side == "L" else "#08519c", "-", 2.0
-        return f"Audio 2 target no atendido {side}", "#74c476" if side == "L" else "#6baed6", "--", 1.1
+            return f"{AUDIO2_DISPLAY}: target atendido {side}", "#006d2c" if side == "L" else "#08519c", "-", 2.0
+        return f"{AUDIO2_DISPLAY}: target no atendido {side}", "#74c476" if side == "L" else "#6baed6", "--", 1.1
     if label.startswith("audio4/block_start/"):
         parts = label.split("/")
         if len(parts) >= 3:
             context["audio4_attended_class"] = parts[2]
-        return f"Audio 4 atiende {context.get('audio4_attended_class')}", "#8c6d31", "-", 1.2
+        return f"{AUDIO4_DISPLAY}: atiende {context.get('audio4_attended_class')}", "#8c6d31", "-", 1.2
     if label.startswith("audio4/event/") and "/tgt" in label:
         parts = label.split("/")
         side = parts[2] if len(parts) > 2 else "?"
         event_type = parts[3] if len(parts) > 3 else "?"
         target = _audio4_target_for_class(context.get("audio4_attended_class"))
         if target == (side, event_type):
-            return f"Audio 4 target atendido {side}/{event_type}", "#006d2c" if side == "L" else "#08519c", "-", 2.0
-        return f"Audio 4 target no atendido {side}/{event_type}", "#74c476" if side == "L" else "#6baed6", "--", 1.1
+            return f"{AUDIO4_DISPLAY}: target atendido {side}/{event_type}", "#006d2c" if side == "L" else "#08519c", "-", 2.0
+        return f"{AUDIO4_DISPLAY}: target no atendido {side}/{event_type}", "#74c476" if side == "L" else "#6baed6", "--", 1.1
     if "baseline/" in label:
         return "baseline", "#9467bd", "-", 1.2
     if "assr/" in label:
@@ -170,15 +173,15 @@ def _phase_from_marker(label: str) -> str | None:
     if label.startswith("visual/block_start/"):
         return f"visual b{label.split('/')[-1]}"
     if label.startswith("audio2/practice/start"):
-        return "Audio 2 practica"
+        return f"{AUDIO2_DISPLAY}: practica"
     if label.startswith("audio2/block_start/"):
         parts = label.split("/")
         if len(parts) >= 4:
             attended = parts[2].replace("attL", "atiende L").replace("attR", "atiende R")
-            return f"Audio 2 {attended} b{parts[3]}"
-        return "Audio 2"
+            return f"{AUDIO2_DISPLAY}: {attended} b{parts[3]}"
+        return AUDIO2_DISPLAY
     if label.startswith("audio4/practice/start"):
-        return "Audio 4 practica"
+        return f"{AUDIO4_DISPLAY}: practica"
     if label.startswith("audio4/block_start/"):
         parts = label.split("/")
         if len(parts) >= 4:
@@ -188,8 +191,8 @@ def _phase_from_marker(label: str) -> str | None:
                 "right_low": "der grave",
                 "right_high": "der agudo",
             }
-            return f"Audio 4 {class_labels.get(parts[2], parts[2])} b{parts[3]}"
-        return "Audio 4"
+            return f"{AUDIO4_DISPLAY}: {class_labels.get(parts[2], parts[2])} b{parts[3]}"
+        return AUDIO4_DISPLAY
     if label.startswith("assr/"):
         return "ASSR"
     if label.startswith("exp/start"):
@@ -210,25 +213,25 @@ def _phase_color(phase: str) -> str:
         return "#3182bd"
     if phase.startswith("visual"):
         return "#9ecae1"
-    if phase == "Audio 2 practica":
+    if phase == f"{AUDIO2_DISPLAY}: practica":
         return "#fee6ce"
-    if "Audio 2 atiende L" in phase:
+    if f"{AUDIO2_DISPLAY}: atiende L" in phase:
         return "#fdae6b"
-    if "Audio 2 atiende R" in phase:
+    if f"{AUDIO2_DISPLAY}: atiende R" in phase:
         return "#e6550d"
-    if phase.startswith("Audio 2"):
+    if phase.startswith(AUDIO2_DISPLAY):
         return "#fdd0a2"
-    if phase == "Audio 4 practica":
+    if phase == f"{AUDIO4_DISPLAY}: practica":
         return "#fdd0a2"
-    if "Audio 4 izq grave" in phase:
+    if f"{AUDIO4_DISPLAY}: izq grave" in phase:
         return "#fdae6b"
-    if "Audio 4 izq agudo" in phase:
+    if f"{AUDIO4_DISPLAY}: izq agudo" in phase:
         return "#fd8d3c"
-    if "Audio 4 der grave" in phase:
+    if f"{AUDIO4_DISPLAY}: der grave" in phase:
         return "#e6550d"
-    if "Audio 4 der agudo" in phase:
+    if f"{AUDIO4_DISPLAY}: der agudo" in phase:
         return "#a63603"
-    if phase.startswith("Audio 4"):
+    if phase.startswith(AUDIO4_DISPLAY):
         return "#fdae6b"
     return {
         "baseline ojos abiertos": "#c7e9c0",
@@ -310,7 +313,7 @@ def _apply_robust_ylim(ax, values: np.ndarray, percentile: float, min_span: floa
 
 
 def _add_side_panel(fig, marker_rows: list[AudioMarker], phase_rows: list[tuple[float, float, str]]) -> None:
-    panel = fig.add_axes([0.80, 0.08, 0.19, 0.84])
+    panel = fig.add_axes([0.75, 0.08, 0.24, 0.84])
     panel.set_axis_off()
     panel.add_patch(
         Rectangle(
@@ -678,7 +681,7 @@ def main() -> None:
     has_side_panel = bool(marker_rows or phase_rows)
     if has_side_panel:
         _add_side_panel(fig, marker_rows, phase_rows)
-        fig.subplots_adjust(left=0.06, right=0.78, top=0.93, bottom=0.12, hspace=0.20)
+        fig.subplots_adjust(left=0.06, right=0.73, top=0.93, bottom=0.12, hspace=0.20)
     else:
         fig.subplots_adjust(left=0.06, right=0.98, top=0.93, bottom=0.12, hspace=0.20)
 
