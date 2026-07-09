@@ -5,6 +5,7 @@ data/raw/
 data/private/
 outputs/*
 !outputs/README.md
+acquisition/eye_fixation_monitor/outputs/
 *.xdf
 !data/synthetic/
 !data/synthetic/*.xdf
