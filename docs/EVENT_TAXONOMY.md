@@ -1,39 +1,49 @@
-# Taxonomía de eventos auditivos
+# Taxonomia de eventos auditivos
 
-Esta taxonomía evita una ambigüedad importante: en este pipeline,
-`standard` no significa "todo lo no atendido". `standard` es el sonido
-común o no-target. Los targets físicamente presentes pero pertenecientes
-al stream o clase no indicada se codifican por separado como
+Esta taxonomia evita una ambiguedad importante: en este pipeline,
+`standard` no significa "todo lo no atendido". `standard` es el estimulo
+estandar/no objetivo. Los objetivos fisicamente presentes pero pertenecientes
+a la corriente o clase no indicada se codifican por separado como
 `target_ignorado`.
 
-## Análisis estricto
+En el codigo se conservan nombres internos en ingles (`target`, `hit`,
+`miss`) para mantener compatibilidad con los CSV y scripts. En tablas,
+figuras y texto del manuscrito se recomienda esta convencion:
 
-| Clase | Qué ocurre | Respuesta esperada | Uso |
-|---|---|---|---|
-| `standard` | Sonido común/no-target, izquierdo o derecho | No | Línea de base del paradigma auditivo |
-| `target_atendido` | Target físico que coincide con la consigna del bloque | Sí | Evento objetivo definido por la tarea |
-| `target_atendido_hit` | `target_atendido` con respuesta dentro de la ventana conductual | Sí, y respondió | ERP/P300 asociado a detección/decisión/respuesta |
-| `target_atendido_miss` | `target_atendido` sin respuesta dentro de la ventana | Sí, pero no respondió | Auditoría de conducta; no fue la curva principal |
-| `target_ignorado` | Target físico del lado/tipo no indicado por la consigna | No | Control de target presente pero no seleccionado |
+- Primera mencion: "estimulo objetivo (target)"; luego, "objetivo".
+- `hit`: "acierto (hit)" en la primera mencion; luego, "acierto".
+- `miss`: "omision (miss)" en la primera mencion; luego, "omision".
+- `standard` o `standard/non-target`: "estandar/no objetivo".
+- Evitar "target-hit" en texto publico; usar "ensayos con objetivo atendido y respuesta correcta".
 
-Ejemplo: bloque audio 2 con consigna `attL`.
+## Analisis estricto
 
-- Tono común izquierdo o derecho: `standard`.
-- Target izquierdo: `target_atendido`.
-- Target izquierdo respondido: `target_atendido_hit`.
-- Target derecho: `target_ignorado`.
+| Clase interna | Termino recomendado | Que ocurre | Respuesta esperada | Uso |
+|---|---|---|---|---|
+| `standard` | estandar/no objetivo | Sonido comun/no objetivo, izquierdo o derecho | No | Linea de base del paradigma auditivo |
+| `target_atendido` | objetivo atendido | Objetivo fisico que coincide con la consigna del bloque | Si | Evento objetivo definido por la tarea |
+| `target_atendido_hit` | objetivo atendido con respuesta / acierto | `target_atendido` con respuesta dentro de la ventana conductual | Si, y respondio | ERP asociado a deteccion/decision/respuesta |
+| `target_atendido_miss` | objetivo atendido sin respuesta / omision | `target_atendido` sin respuesta dentro de la ventana | Si, pero no respondio | Auditoria de conducta; no fue la curva principal |
+| `target_ignorado` | objetivo no atendido | Objetivo fisico del lado/tipo no indicado por la consigna | No | Control de objetivo presente pero no seleccionado |
 
-Ejemplo: bloque audio 4 con consigna `left_low`.
+Ejemplo: modulo de audio de dos corrientes con consigna `attL`.
+
+- Tono comun izquierdo o derecho: `standard`.
+- Objetivo izquierdo: `target_atendido`.
+- Objetivo izquierdo respondido: `target_atendido_hit`.
+- Objetivo derecho: `target_ignorado`.
+
+Ejemplo: modulo de audio de cuatro clases con consigna `left_low`.
 
 - `L/tgt_low`: `target_atendido`.
 - `L/tgt_high`, `R/tgt_low` o `R/tgt_high`: `target_ignorado`.
 - Cualquier `std`: `standard`.
 
-## Análisis subjetivo/post hoc
+## Analisis subjetivo/post hoc
 
-El análisis subjetivo conserva el análisis estricto, pero agrega una
+El analisis subjetivo conserva el analisis estricto, pero agrega una
 lectura exploratoria por bloque cuando la matriz conductual sugiere que el
-participante siguió otra regla, por ejemplo inversión de lado o confusión
+participante siguio otra regla, por ejemplo inversion de lado o confusion
 entre tonos high/low.
 
 En esa lectura, `target_subjetivo_hit` significa:
@@ -42,5 +52,5 @@ En esa lectura, `target_subjetivo_hit` significa:
    conducta; y
 2. respuesta con espacio dentro de la ventana.
 
-No debe describirse como análisis confirmatorio. Debe reportarse como
+No debe describirse como analisis confirmatorio. Debe reportarse como
 sensibilidad o post hoc conductual.
