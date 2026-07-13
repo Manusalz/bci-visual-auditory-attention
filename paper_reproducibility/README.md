@@ -11,12 +11,20 @@ logs, absolute LSL timestamps, local paths, or private acquisition logs.
   by trial/window.
 - `data/features_auditory_erp_anonymized.csv`: auditory ERP features by
   event, restricted to the 250-600 ms window used in the final table.
+- `data/features_auditory_subjective_relevance_anonymized.csv`: derived
+  auditory ERP features for the post hoc contrast "subjectively relevant
+  target with response vs standard/no-target". The negative class keeps the
+  same strict standard/no-target epochs used in the strict secondary contrast.
 - `results/table3_audit_final.csv`: frozen final audit table with BA, bootstrap
   CI and permutation p-values.
 - `results/table3_compact_final.csv`: compact version of the same final
   results.
+- `results/auditory_subjective_relevance_posthoc.csv`: frozen post hoc
+  subjective-relevance classification results.
 - `scripts/compute_table3_ba_ci_p.py`: recomputes BA, bootstrap CI and
   permutation p-values from the anonymized features.
+- `scripts/compute_subjective_relevance_ba_ci_p.py`: recomputes the post hoc
+  subjective-relevance auditory classification from anonymized features.
 - `scripts/extract_visual_alpha_features_from_xdf.py`: public extraction
   reference for visual alpha features from an XDF plus an anonymized cue table.
 - `scripts/extract_auditory_erp_features_from_xdf.py`: public extraction
@@ -58,6 +66,24 @@ python paper_reproducibility\scripts\compute_table3_ba_ci_p.py `
 
 The smoke-test p-values and intervals are not scientifically meaningful; they
 only verify that the pipeline runs.
+
+## Recompute post hoc subjective-relevance classification
+
+This analysis is exploratory and should not be interpreted as replacing the
+strict task-defined auditory contrasts. It changes only the positive class:
+instead of instruction-congruent target-hit events, it uses targets recatalogued
+from the behavioral audit as subjectively relevant and answered with a space
+response. The negative class remains the same strict standard/no-target epoch
+set.
+
+```powershell
+python paper_reproducibility\scripts\compute_subjective_relevance_ba_ci_p.py `
+  --data paper_reproducibility\data\features_auditory_subjective_relevance_anonymized.csv `
+  --out paper_reproducibility\results\auditory_subjective_relevance_recomputed.csv `
+  --permutations 10000 `
+  --bootstrap 5000 `
+  --seed 42
+```
 
 ## Regenerate figures
 

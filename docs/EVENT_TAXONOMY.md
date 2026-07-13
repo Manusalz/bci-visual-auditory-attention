@@ -54,3 +54,10 @@ En esa lectura, `target_subjetivo_hit` significa:
 
 No debe describirse como analisis confirmatorio. Debe reportarse como
 sensibilidad o post hoc conductual.
+
+Para clasificacion post hoc, el contraste publico
+`objetivo_subjetivo_relevante_con_respuesta` vs
+`estandar_no_objetivo_estricto` conserva todos los estandares/no objetivos
+elegibles del pipeline estricto. Esto difiere de algunos scripts de figuras
+ERP subjetivas, que pueden submuestrear estandares para reducir costo y mejorar
+legibilidad grafica. Ese submuestreo no debe usarse para reportar BA, IC ni p.
